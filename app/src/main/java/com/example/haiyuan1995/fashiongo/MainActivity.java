@@ -21,8 +21,6 @@ import fragment.SettingFragment;
 import fragment.ShoppingFragment;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
-
-
     @BindView(R.id.id_viewpager)
     ViewPager idViewpager;
     @BindView(R.id.id_tab_home_iv)
@@ -55,6 +53,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     TextView idTabSettingTv;
     @BindView(R.id.id_tab_setting)
     LinearLayout idTabSetting;
+
     private List<Fragment> mFragmentList;
 
     @Override

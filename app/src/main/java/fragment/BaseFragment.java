@@ -58,7 +58,7 @@ public abstract class BaseFragment extends Fragment {
     public static void initToolbar(Toolbar toolbar, Activity activity) {
         if (toolbar != null) {
             toolbar.setTitle(" ");
-            toolbar.findViewById(R.id.id_search_searchView).setVisibility(View.GONE);
+            toolbar.findViewById(R.id.id_toolbar_searchLayout).setVisibility(View.GONE);
             ((AppCompatActivity) activity).setSupportActionBar(toolbar);
         }
     }
