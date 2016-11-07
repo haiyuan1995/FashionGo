@@ -2,22 +2,40 @@ package fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.example.haiyuan1995.fashiongo.AppUrl;
 import com.example.haiyuan1995.fashiongo.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import adapter.RVBaseAdapter;
+import adapter.RecommendationAdapter;
+import adapter.ThreeGoodsADInfoAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.ResponseBody;
+import gsonbean.Banner;
+import gsonbean.GoodsADInfo;
+import gsonbean.Recommendation;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import utils.ImageBannerView;
+import utils.ToastAndSnakebarUtils;
 
 
 /**
@@ -34,6 +52,17 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.id_toolbar_search)
     EditText idToolbarSearch;
     ArrayList<String> imageUrlList = new ArrayList<>();
+
+    private static Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(AppUrl.APP_URL)
+            //GsonConverterFactory.create()表示调用Gson库来解析json返回值
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    @BindView(R.id.id_home_rv_threeGoodsInfo)
+    RecyclerView idHomeRvThreeGoodsInfo;
+    @BindView(R.id.id_home_rv_recommendation)
+    RecyclerView idHomeRvRecommendation;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,64 +75,148 @@ public class HomeFragment extends BaseFragment {
         toolbar.findViewById(R.id.id_toolbar_searchLayout).setVisibility(View.VISIBLE);
 
         initData();
-        initBanner();
+        initThreeGoodsAD();
+        initRecommendation();
         return view;
     }
-public interface BannerService{
-    @GET("getThreeGoodsADInfo")
-    Call<ResponseBody> getBannerImages();
-}
+
+
+    public interface BannerService {
+//    @GET("getThreeGoodsADInfo")
+//    Call<ResponseBody> getBannerImages();
+
+        @GET("getBannerList")
+        Call<Banner> getBannerImages();
+    }
+
+    public interface ThreeGoodsADInfoService {
+        @GET("getThreeGoodsADInfo")
+        Call<GoodsADInfo> getThreeGoodsADInfo();
+    }
+
+    public interface RecommendationService {
+        @GET("getRecommendation")//page页码=1
+        Call<Recommendation> getRecommendation(@Query("page") int page);
+    }
+
+    private void initRecommendation() {
+        RecommendationService service = retrofit.create(RecommendationService.class);
+        Call<Recommendation> call = service.getRecommendation(1);
+        call.enqueue(new Callback<Recommendation>() {
+            @Override
+            public void onResponse(Call<Recommendation> call, Response<Recommendation> response) {
+                initRecommendationAdapter(response.body().getData());
+            }
+
+            @Override
+            public void onFailure(Call<Recommendation> call, Throwable t) {
+t.printStackTrace();
+            }
+        });
+
+    }
+
+    private void initRecommendationAdapter(List<Recommendation.DataBean> data) {
+        final RecommendationAdapter adapter = new RecommendationAdapter(getActivity(), data);
+        adapter.setRecyclerViewItemOnClick(new RVBaseAdapter.RecyclerViewItemOnClick() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ToastAndSnakebarUtils.showToast(getActivity(), "单击" + position);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                ToastAndSnakebarUtils.showToast(getActivity(), "长按" + position);
+            }
+        });
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        idHomeRvRecommendation.setLayoutManager(linearLayoutManager);
+        idHomeRvRecommendation.setAdapter(adapter);
+    }
+
+    private void initThreeGoodsAD() {
+        ThreeGoodsADInfoService adInfoService = retrofit.create(ThreeGoodsADInfoService.class);
+        Call<GoodsADInfo> call = adInfoService.getThreeGoodsADInfo();
+        call.enqueue(new Callback<GoodsADInfo>() {
+            @Override
+            public void onResponse(Call<GoodsADInfo> call, Response<GoodsADInfo> response) {
+                GoodsADInfo.DataBean more = new GoodsADInfo.DataBean();
+                more.setADImage("R.drawable.ic_goodsinfo_more");
+                response.body().getData().add(3, more);//手动添加一个推荐商品，3个太难看
+
+                initGoodsAdapter(response.body().getData());
+            }
+
+            @Override
+            public void onFailure(Call<GoodsADInfo> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+    }
+
+    private void initGoodsAdapter(List<GoodsADInfo.DataBean> data) {
+        ThreeGoodsADInfoAdapter adapter = new ThreeGoodsADInfoAdapter(getActivity(), data);
+        adapter.setRecyclerViewItemOnClick(new RVBaseAdapter.RecyclerViewItemOnClick() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ToastAndSnakebarUtils.showToast(getActivity(), "单击" + position);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                ToastAndSnakebarUtils.showToast(getActivity(), "长按" + position);
+            }
+        });
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
+        idHomeRvThreeGoodsInfo.setLayoutManager(gridLayoutManager);
+
+        idHomeRvThreeGoodsInfo.setAdapter(adapter);
+    }
+
+
     private void initBanner() {
 
+        String[] strings = {"1", "2", "3", "4", "5"};
+        idHomeImageBannerView.setImageResources(imageUrlList, strings, new ImageBannerView.ImageCycleViewListener() {
+            @Override
+            public void displayImage(String imageURL, ImageView imageView) {
+                Glide.with(getActivity()).load(imageURL).into(imageView);
+            }
 
-
-
-//        urlList.add("http://image2.sina.com.cn/dy/c/p/2007-01-18/U1565P1T1D12074936F21DT20070118224118.jpg");
-//        urlList.add("http://www.wokeji.com/shouye/shipin/201605/W020160524632769348038.png");
-//        urlList.add("http://www.ecns.cn/hd/2016/05/25/1d0dccb881dd49289ba931e41de81665.jpg");
-//        urlList.add("http://img.sootuu.com/Exchange/2010-5/20105191031898859.jpg");
-//        String[] strings = {"现代快报", "科技日报", "北京晨报", "人民法院报"};
-//
-//        idHomeImageBannerView.setImageResources(urlList, strings, new ImageBannerView.ImageCycleViewListener() {
-//            @Override
-//            public void displayImage(String imageURL, ImageView imageView) {
-//                Glide.with(getActivity()).load(imageURL).into(imageView);
-//            }
-//
-//            @Override
-//            public void onImageClick(int position, View imageView) {
-//                switch (position) {
-//                    case 0:
-//                        break;
-//                }
-//            }
-//        });
+            @Override
+            public void onImageClick(int position, View imageView) {
+                switch (position) {
+                    case 0:
+                        break;
+                }
+            }
+        });
     }
 
     @Override
     void initData() {
-//        Retrofit retrofit=new Retrofit.Builder()
-//                .baseUrl("http://112.124.118.133:9065/ssgApp/")
-//                .build();
-//        BannerService bannerService=retrofit.create(BannerService.class);
-//        Call<ResponseBody> call=bannerService.getBannerImages();
-//        call.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                try {
-//                    System.out.println(response.body().string());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//
-//            }
-//        });
+
+        BannerService bannerService = retrofit.create(BannerService.class);
+        Call<Banner> call = bannerService.getBannerImages();
+        call.enqueue(new Callback<Banner>() {
+            @Override
+            public void onResponse(Call<Banner> call, Response<Banner> response) {
+                System.out.println(response.body().getData().get(0).getBannerImage() + "\n" + response.body().getData().get(0).getGoodsCode());
+                for (int i = 0; i < response.body().getData().size(); i++) {
+                    imageUrlList.add(response.body().getData().get(i).getBannerImage());
+                }
+                initBanner();
+            }
+
+            @Override
+            public void onFailure(Call<Banner> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
 
     }
-
 
 }

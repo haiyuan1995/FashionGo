@@ -7,8 +7,9 @@ import java.util.List;
  */
 
 public class Banner  {
+
     /**
-     * data : [{"ADImage":"http://112.124.118.133:9065/ssg/uploads/1fb8f402-a585-4ba1-903c-dff23294dd71.png"},{"ADImage":"http://112.124.118.133:9065/ssg/uploads/11c0cf8d-112b-405a-a5ba-abc819a5d739.png"},{"ADImage":"http://112.124.118.133:9065/ssg/uploads/d715e5b4-d65f-451f-93d8-30059434ec41.png"}]
+     * data : [{"bannerImage":"http://112.124.118.133:9065/ssg/uploads/d2cec0bc-30fa-4a5d-a7c8-306fa7a21308.jpg","goodsCode":"5"},{"bannerImage":"http://112.124.118.133:9065/ssg/uploads/a0492961-1f13-4cff-afd9-bc8a405cc6ae.jpg","goodsCode":"2"},{"bannerImage":"http://112.124.118.133:9065/ssg/uploads/3eb65334-b006-4e74-bfff-3f01d1b796db.jpg","goodsCode":"2"},{"bannerImage":"http://112.124.118.133:9065/ssg/uploads/bf1d587d-0560-4313-9f07-b797b1d95b81.jpg","goodsCode":"9856996"},{"bannerImage":"http://112.124.118.133:9065/ssg/uploads/649fc5ec-74da-49d6-b24d-2d9aec8fc861.jpg","goodsCode":"1"}]
      * message : success
      * errorcode : 0
      */
@@ -16,7 +17,8 @@ public class Banner  {
     private String message;
     private int errorcode;
     /**
-     * ADImage : http://112.124.118.133:9065/ssg/uploads/1fb8f402-a585-4ba1-903c-dff23294dd71.png
+     * bannerImage : http://112.124.118.133:9065/ssg/uploads/d2cec0bc-30fa-4a5d-a7c8-306fa7a21308.jpg
+     * goodsCode : 5
      */
 
     private List<DataBean> data;
@@ -46,14 +48,23 @@ public class Banner  {
     }
 
     public static class DataBean {
-        private String ADImage;
+        private String bannerImage;
+        private String goodsCode;
 
-        public String getADImage() {
-            return ADImage;
+        public String getBannerImage() {
+            return bannerImage;
         }
 
-        public void setADImage(String ADImage) {
-            this.ADImage = ADImage;
+        public void setBannerImage(String bannerImage) {
+            this.bannerImage = bannerImage;
+        }
+
+        public String getGoodsCode() {
+            return goodsCode;
+        }
+
+        public void setGoodsCode(String goodsCode) {
+            this.goodsCode = goodsCode;
         }
     }
 }

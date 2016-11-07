@@ -257,9 +257,7 @@ public class ImageBannerView extends LinearLayout {
 					mImageViews[i].setBackgroundResource(R.mipmap.banner_dian_default);
 				}
 			}
-
 		}
-
 	}
 
 	private class ImageCycleAdapter extends PagerAdapter {
@@ -289,7 +287,7 @@ public class ImageBannerView extends LinearLayout {
 
 		}
 
-		@Override
+        @Override
 		public int getCount() {
 			return mAdList.size();
 		}
