@@ -1,6 +1,7 @@
 package fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,8 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.cjj.MaterialRefreshLayout;
+import com.cjj.MaterialRefreshListener;
 import com.example.haiyuan1995.fashiongo.AppUrl;
 import com.example.haiyuan1995.fashiongo.R;
 
@@ -44,13 +48,20 @@ import utils.ToastAndSnakebarUtils;
 
 public class HomeFragment extends BaseFragment {
 
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.id_home_imageBannerView)
     ImageBannerView idHomeImageBannerView;
     @BindView(R.id.id_toolbar_search)
     EditText idToolbarSearch;
+    @BindView(R.id.id_home_rv_threeGoodsInfo)
+    RecyclerView idHomeRvThreeGoodsInfo;
+    @BindView(R.id.id_home_rv_recommendation)
+    RecyclerView idHomeRvRecommendation;
+    @BindView(R.id.id_home_refresh)
+    MaterialRefreshLayout idHomeRefresh;
+
+
     ArrayList<String> imageUrlList = new ArrayList<>();
 
     private static Retrofit retrofit = new Retrofit.Builder()
@@ -58,28 +69,44 @@ public class HomeFragment extends BaseFragment {
             //GsonConverterFactory.create()表示调用Gson库来解析json返回值
             .addConverterFactory(GsonConverterFactory.create())
             .build();
-    @BindView(R.id.id_home_rv_threeGoodsInfo)
-    RecyclerView idHomeRvThreeGoodsInfo;
-    @BindView(R.id.id_home_rv_recommendation)
-    RecyclerView idHomeRvRecommendation;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         //初始化toolbar
         toolbar.setLogo(R.mipmap.logo);
         BaseFragment.initToolbar(toolbar, getActivity());
         toolbar.findViewById(R.id.id_toolbar_searchLayout).setVisibility(View.VISIBLE);
+        idHomeRefresh.setMaterialRefreshListener(new MaterialRefreshListener() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        imageUrlList.clear();//刷新时先清空之前的图片地址集合
 
-        initData();
-        initThreeGoodsAD();
-        initRecommendation();
+                        initData();
+                        initThreeGoodsAD();
+                        initRecommendation();
+                        idHomeRefresh.finishRefresh();
+                        ToastAndSnakebarUtils.showToast(getContext(),"刷新成功!");
+                    }
+                },2000);
+            }
+        });
         return view;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initData();
+        initThreeGoodsAD();
+        initRecommendation();
+    }
 
     public interface BannerService {
 //    @GET("getThreeGoodsADInfo")
@@ -95,7 +122,8 @@ public class HomeFragment extends BaseFragment {
     }
 
     public interface RecommendationService {
-        @GET("getRecommendation")//page页码=1
+        @GET("getRecommendation")
+//page页码=1
         Call<Recommendation> getRecommendation(@Query("page") int page);
     }
 
@@ -110,9 +138,11 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onFailure(Call<Recommendation> call, Throwable t) {
-t.printStackTrace();
+                t.printStackTrace();
             }
         });
+
+
 
     }
 
@@ -130,9 +160,11 @@ t.printStackTrace();
             }
         });
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         idHomeRvRecommendation.setLayoutManager(linearLayoutManager);
         idHomeRvRecommendation.setAdapter(adapter);
+        //数据加载完成
+        idHomeRefresh.finishRefresh();
     }
 
     private void initThreeGoodsAD() {

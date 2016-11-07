@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        //波纹涟漪颜色
+        <item name="android:colorControlHighlight">@color/colorPrimary</item>
     </style>
 
 </resources>
