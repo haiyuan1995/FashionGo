@@ -14,7 +14,7 @@ import java.util.List;
 import gsonbean.Recommendation;
 
 /**
- * Created by haiyuan1995 on 2016/11/7.
+ * 推荐商品recyclerview的适配器
  */
 
 public class RecommendationAdapter extends RVBaseAdapter {

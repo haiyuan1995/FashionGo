@@ -12,12 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
-import com.example.haiyuan1995.fashiongo.AppUrl;
 import com.example.haiyuan1995.fashiongo.R;
 
 import java.util.ArrayList;
@@ -34,12 +32,12 @@ import gsonbean.Recommendation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import utils.ImageBannerView;
 import utils.ToastAndSnakebarUtils;
+
+import static com.example.haiyuan1995.fashiongo.AppUrl.retrofit;
 
 
 /**
@@ -64,11 +62,6 @@ public class HomeFragment extends BaseFragment {
 
     ArrayList<String> imageUrlList = new ArrayList<>();
 
-    private static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(AppUrl.APP_URL)
-            //GsonConverterFactory.create()表示调用Gson库来解析json返回值
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
 
 
     @Nullable

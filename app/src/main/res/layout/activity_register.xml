@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#f5f5f5"
+    android:columnCount="1"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:text="注册"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:text="Register"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#000000" />
+
+    <CheckBox
+        android:id="@+id/id_register_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:clickable="false"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_toStartOf="@+id/textView1" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:cardElevation="3dp"
+        app:cardCornerRadius="3dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="68dp"
+        android:id="@+id/cardlayout">
+        <LinearLayout
+            android:id="@+id/input"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView2"
+            android:layout_margin="20dp"
+            android:layout_marginTop="76dp"
+            android:orientation="vertical" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_re_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#00ffffff"
+                android:hint="请输入手机号码"
+                android:inputType="number"
+                android:maxLength="11"
+                android:maxLines="1"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                app:met_clearButton="true"
+                android:textColor="#ff1d1d1d"
+                android:textColorHint="#ff666666"
+                android:textSize="16.0sp" />
+                <android.support.v7.widget.CardView
+                    android:id="@+id/id_cv_getPhoneCaptcha"
+                    android:layout_width="wrap_content"
+                    app:cardElevation="3dp"
+                    android:clickable="true"
+                    android:stateListAnimator="@drawable/cardview_touch_anim"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:layout_marginBottom="8dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="3dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="获取验证码"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        />
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_re_verificationCode"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#00ffffff"
+                android:gravity="center_vertical"
+                android:hint="请输入验证码"
+                app:met_clearButton="true"
+                android:inputType="text|number"
+                android:maxLength="16"
+                android:maxLines="1"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:textColor="#ff1d1d1d"
+                android:textColorHint="#ff666666"
+                android:textSize="16.0sp" />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_re_inviteCode"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:background="#00ffffff"
+            android:gravity="center_vertical"
+            android:hint="邀请码"
+            app:met_clearButton="true"
+            android:inputType="text|number"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:textColor="#ff1d1d1d"
+            android:textColorHint="#ff666666"
+            android:textSize="16.0sp" />
+
+    </LinearLayout>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_re_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#00ffffff"
+                android:gravity="center_vertical"
+                android:hint="请输入密码"
+                app:met_clearButton="true"
+                android:inputType="textPassword"
+                android:maxLength="16"
+                android:maxLines="1"
+                android:textColor="#ff1d1d1d"
+                android:textColorHint="#ff666666"
+                android:textSize="16.0sp" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_re_checkPassword"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#00ffffff"
+                android:gravity="center_vertical"
+                android:hint="请确认密码"
+                app:met_clearButton="true"
+                android:inputType="textPassword"
+                android:maxLength="16"
+                android:maxLines="1"
+                android:textColor="#ff1d1d1d"
+                android:textColorHint="#ff666666"
+                android:textSize="16.0sp" />
+
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我已看过并同意时尚微购APP"
+        android:textColor="#ff1d1d1d"
+        android:textColorHint="#ff666666"
+        android:layout_marginTop="8dp"
+        android:layout_above="@+id/btn_registers"
+        android:layout_below="@+id/cardlayout"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="《用户使用协议》"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/tv_user_agreement"
+        android:layout_below="@id/cardlayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="26dp" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/btn_registers"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:elevation="3dp"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="5dp"
+        android:clickable="true"
+        android:stateListAnimator="@drawable/cardview_touch_anim"
+        app:cardBackgroundColor="@color/colorPrimary"
+        android:foreground="?attr/selectableItemBackground"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:layout_alignTop="@+id/tv_user_agreement"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="注册"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            />
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

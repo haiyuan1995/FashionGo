@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.haiyuan1995.fashiongo.R;
+
 import utils.ToastAndSnakebarUtils;
 
 /**
@@ -32,6 +33,7 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);//在fragmnent中使用菜单需要加这句话
+
     }
 
 
