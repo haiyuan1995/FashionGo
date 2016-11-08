@@ -40,22 +40,6 @@ public abstract class BaseFragment extends Fragment {
 
     abstract void initData();
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_goodslist:
-                ToastAndSnakebarUtils.showToast(getActivity(), "点击菜单");
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
     public static void initToolbar(Toolbar toolbar, Activity activity) {
         if (toolbar != null) {

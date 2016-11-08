@@ -1,9 +1,13 @@
 package com.example.haiyuan1995.fashiongo;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -113,6 +117,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             public void onPageSelected(int position) {
                 int currentItem = idViewpager.getCurrentItem();
                 setTabColor(currentItem);
+
             }
 
             @Override

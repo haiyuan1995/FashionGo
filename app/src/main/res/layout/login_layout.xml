@@ -132,21 +132,10 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/textView2"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="70dp"
-            android:src="@mipmap/login_logo"
-            android:textColor="#ffffff"
-            android:textSize="40sp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="66dp"
+            android:layout_marginTop="50dp"
             android:layout_below="@+id/textView2"
             android:layout_alignParentStart="true"
             android:elevation="3dp"
@@ -177,7 +166,7 @@
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
                         app:met_textColorHint="@android:color/darker_gray"
-                        android:inputType="textPersonName"
+                        android:inputType="text|number"
                         app:met_helperText="请输入你的账号"
                         app:met_helperTextColor="#da000000"
                         app:met_clearButton="true"
@@ -201,5 +190,14 @@
                 </LinearLayout>
 
         </android.support.v7.widget.CardView>
+
+        <ImageView
+            android:id="@+id/textView2"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="101dp"
+            android:src="@mipmap/login_logo"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </RelativeLayout>

@@ -8,6 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -85,7 +88,7 @@ public class HomeFragment extends BaseFragment {
                         initThreeGoodsAD();
                         initRecommendation();
                         idHomeRefresh.finishRefresh();
-                        ToastAndSnakebarUtils.showToast(getContext(),"刷新成功!");
+
                     }
                 },2000);
             }
@@ -131,7 +134,7 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onFailure(Call<Recommendation> call, Throwable t) {
-                t.printStackTrace();
+                ToastAndSnakebarUtils.showToast(getContext(),"刷新失败:"+t.getMessage());
             }
         });
 
@@ -158,6 +161,7 @@ public class HomeFragment extends BaseFragment {
         idHomeRvRecommendation.setAdapter(adapter);
         //数据加载完成
         idHomeRefresh.finishRefresh();
+        ToastAndSnakebarUtils.showToast(getContext(),"刷新成功!");
     }
 
     private void initThreeGoodsAD() {
@@ -244,4 +248,20 @@ public class HomeFragment extends BaseFragment {
 
     }
 
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_goodslist:
+                ToastAndSnakebarUtils.showToast(getActivity(), "点击菜单");
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -13,18 +13,6 @@
         android:layout_marginLeft="30dp"
         android:background="@color/colorWhite">
 
-        <!--<SearchView-->
-            <!--android:gravity="center"-->
-            <!--android:id="@+id/id_search_searchView"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:queryHint="搜索商品"-->
-            <!--android:focusable="false"-->
-            <!--android:focusableInTouchMode="true"-->
-            <!--android:imeOptions="actionSearch"-->
-            <!--android:iconifiedByDefault="false"-->
-            <!--android:layout_height="30dp">-->
-
-        <!--</SearchView>-->
         <LinearLayout
             android:id="@+id/id_toolbar_searchLayout"
             android:layout_width="match_parent"
