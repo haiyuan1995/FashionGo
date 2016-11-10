@@ -3,6 +3,7 @@ package com.example.haiyuan1995.fashiongo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.View;
@@ -188,9 +189,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     try {
                         JSONObject jsonObject=new JSONObject(response.body().string());
                         if(!TextUtils.isEmpty(jsonObject.getString("accessToken"))){
-                            ToastAndSnakebarUtils.showSnakebar(v,"注册成功！",Toast.LENGTH_LONG,null,null);
+                            ToastAndSnakebarUtils.showSnakebar(v,"注册成功！", Snackbar.LENGTH_LONG,null,null);
                         }else{
-                            ToastAndSnakebarUtils.showSnakebar(v,"注册失败:"+jsonObject.getString("message"),Toast.LENGTH_LONG,null,null);
+                            ToastAndSnakebarUtils.showSnakebar(v,"注册失败:"+jsonObject.getString("message"),Snackbar.LENGTH_LONG,null,null);
                         }
                     } catch (JSONException | IOException e) {
                         e.printStackTrace();

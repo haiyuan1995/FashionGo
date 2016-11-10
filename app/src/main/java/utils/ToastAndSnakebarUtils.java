@@ -22,7 +22,7 @@ public class ToastAndSnakebarUtils {
         toast.show();
     }
 
-    public static void showSnakebar(View view, String message,int duration, String actionText, View.OnClickListener clickListener){
+    public static void showSnakebar(View view, String message,int duration, String actionText,View.OnClickListener clickListener){
         if (snackbar==null){
             snackbar=Snackbar.make(view,message,duration).setAction(actionText,clickListener);
         }else{

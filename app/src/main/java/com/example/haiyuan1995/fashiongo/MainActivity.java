@@ -67,6 +67,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        //初始化SharedPreferences
+//        getSharedPreferences("config",MODE_PRIVATE).edit().putString("accessToken","").apply();
         initData();
         initEvent();
 
