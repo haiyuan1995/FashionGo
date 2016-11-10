@@ -1,13 +1,14 @@
 package com.example.haiyuan1995.fashiongo;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -59,7 +60,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     LinearLayout idTabSetting;
 
     private List<Fragment> mFragmentList;
-
+    private MyBroadcastReceiver broadcastReceiver=new MyBroadcastReceiver();
+    private FragmentPagerAdapter mFragmentPagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,12 +82,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     void initData() {
+        //注册广播接收器（动态注册）,记得添加过滤
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("SettingFragment");
+        filter.addAction("LoginActivity");
+        this.registerReceiver(broadcastReceiver, filter);
+
+
         mFragmentList = new ArrayList<>();
         Fragment homeFragment = new HomeFragment();
         Fragment orderFragment = new OrderFragment();
         Fragment shoppingFragment = new ShoppingFragment();
         Fragment myFragment = new MyFragment();
-        Fragment settingFragment = new SettingFragment();
+        final Fragment settingFragment = new SettingFragment();
 
         mFragmentList.add(homeFragment);
         mFragmentList.add(orderFragment);
@@ -93,7 +102,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mFragmentList.add(myFragment);
         mFragmentList.add(settingFragment);
 
-        FragmentPagerAdapter mFragmentPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+         mFragmentPagerAdapter= new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 return mFragmentList.get(position);
@@ -103,7 +112,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             public int getCount() {
                 return mFragmentList.size();
             }
-        };
+
+            @Override
+            public int getItemPosition(Object object) {
+                return POSITION_NONE;
+            }
+
+         };
 
         idViewpager.setAdapter(mFragmentPagerAdapter);
 
@@ -125,6 +140,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             }
         });
+
 
     }
 
@@ -201,4 +217,33 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         idTabMyTv.setTextColor(getColor(R.color.colorBlack));
         idTabSettingTv.setTextColor(getColor(R.color.colorBlack));
     }
+
+
+        class MyBroadcastReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String action=intent.getAction();
+
+            if (TextUtils.equals(action,"SettingFragment")){
+                System.out.println("receiveLogout");
+                mFragmentPagerAdapter.notifyDataSetChanged();
+            }else if (TextUtils.equals(action,"LoginActivity")){
+                System.out.println("receiveLogin");
+                mFragmentPagerAdapter.notifyDataSetChanged();
+            }
+
+
+
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.unregisterReceiver(broadcastReceiver);
+    }
+
 }

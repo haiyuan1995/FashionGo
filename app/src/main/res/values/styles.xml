@@ -10,4 +10,9 @@
         <item name="android:colorControlHighlight">@color/colorPrimary</item>
     </style>
 
+    <!-- 上传图片dialog动画-->
+    <style name="dialog_select_picture_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_picture_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_picture_out</item>
+    </style>
 </resources>

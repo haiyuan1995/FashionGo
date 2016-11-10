@@ -171,12 +171,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                         edit.putString("accessToken",accessToken);
                         edit.apply();
 
-                        if (!TextUtils.isEmpty(accessToken)) {
+                        if (!TextUtils.isEmpty(preferences.getString("accessToken",""))) {
                             ToastAndSnakebarUtils.
                                     showToast(LoginActivity.this,
                                             jsonObject.getString("message"));
-
-                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                            //发送广播通知settingfragment更新UI
+                                LoginActivity.this.sendBroadcast(new Intent().setAction("LoginActivity"));
+//                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
                             finish();
                         }
 

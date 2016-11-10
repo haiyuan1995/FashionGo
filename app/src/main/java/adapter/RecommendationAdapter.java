@@ -19,7 +19,7 @@ import gsonbean.Recommendation;
 
 public class RecommendationAdapter extends RVBaseAdapter {
 
-    public RecommendationAdapter(Context context, List list) {
+    public RecommendationAdapter(Context context, List<Recommendation.DataBean> list) {
         super(context, list);
     }
 
@@ -41,9 +41,9 @@ public class RecommendationAdapter extends RVBaseAdapter {
         return new MyViewHolder(view);
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    private class MyViewHolder extends RecyclerView.ViewHolder{
         private ImageView imageView;
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             imageView= (ImageView) itemView.findViewById(R.id.id_recommendationImage);
         }
