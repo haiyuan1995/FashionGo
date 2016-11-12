@@ -208,20 +208,22 @@ public class HomeFragment extends BaseFragment {
     private void initBanner() {
 
         String[] strings = {"1", "2", "3", "4", "5"};
-        idHomeImageBannerView.setImageResources(imageUrlList, strings, new ImageBannerView.ImageCycleViewListener() {
-            @Override
-            public void displayImage(String imageURL, ImageView imageView) {
-                Glide.with(getActivity()).load(imageURL).into(imageView);
-            }
-
-            @Override
-            public void onImageClick(int position, View imageView) {
-                switch (position) {
-                    case 0:
-                        break;
+        if (!imageUrlList.isEmpty()) {
+            idHomeImageBannerView.setImageResources(imageUrlList, strings, new ImageBannerView.ImageCycleViewListener() {
+                @Override
+                public void displayImage(String imageURL, ImageView imageView) {
+                    Glide.with(getActivity()).load(imageURL).into(imageView);
                 }
-            }
-        });
+
+                @Override
+                public void onImageClick(int position, View imageView) {
+                    switch (position) {
+                        case 0:
+                            break;
+                    }
+                }
+            });
+        }
     }
 
     @Override

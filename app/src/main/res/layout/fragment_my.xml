@@ -55,13 +55,13 @@
                         />
 
                     <TextView
-                        android:text="手机号快速注册"
-                        android:layout_margin="8dp"
+                        android:text="邮箱"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:textSize="16sp"
+                        android:textColor="@color/colorWhiteDark"
                         android:layout_weight="1"
-                        android:id="@+id/id_user_phone" />
+                        android:id="@+id/id_user_email" />
 
                 </LinearLayout>
 
@@ -91,8 +91,8 @@
                     android:visibility="visible"
                     >
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:src="@mipmap/ic_default"
                         android:background="@drawable/image_roundness_bg"
                         android:id="@+id/id_toolbar_user_picture"

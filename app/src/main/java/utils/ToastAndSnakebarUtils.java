@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 /**
- * Created by haiyuan on 2016/11/3.
+ * Toast和snakebar的封装类
  */
 
 public class ToastAndSnakebarUtils {
@@ -25,8 +25,6 @@ public class ToastAndSnakebarUtils {
     public static void showSnakebar(View view, String message,int duration, String actionText,View.OnClickListener clickListener){
         if (snackbar==null){
             snackbar=Snackbar.make(view,message,duration).setAction(actionText,clickListener);
-        }else{
-            snackbar.setText(message);
         }
         snackbar.show();
     }

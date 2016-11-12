@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -35,6 +36,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,7 +85,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
     @BindView(R.id.et_person_qq)
     EditText etPersonQq;
     @BindView(R.id.et_person_address)
-    EditText etPersonAddress;
+    TextView etPersonAddress;
     @BindView(R.id.et_person_address_details)
     EditText etPersonAddressDetails;
     @BindView(R.id.id_person_cv_selectPicture)
@@ -92,6 +94,8 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
     Toolbar idToolbar;
     @BindView(R.id.et_person_email)
     EditText etPersonEmail;
+    @BindView(R.id.id_select_address)
+    CardView idSelectAddress;
 
     private static final int PHOTO_SUCCESS = 1;//从图库中获取
 
@@ -99,16 +103,23 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
 
     private static final int PHOTO_REQUEST_CUT = 3;//裁剪后返回的图片
 
+    public static final int RESULT_SELECT_ADDRESS=0;
+
 
     private AlertDialog alert;
 
-    private boolean ifSelectPicture = false;//判断是否有选择图片，默认为无
+//    private boolean ifSelectPicture = false;//判断是否有选择图片，默认为无
 
     private Uri uritempFile;//图片裁剪后的绝对路径
 
     private String accessToken;
 
     private SharedPreferences preferences;
+
+    //省市区的Code
+    String pCode="";
+    String cCode="";
+    String aCode="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -132,8 +143,10 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
             }
         });
         idPersonCvSelectPicture.setOnClickListener(this);
-
         idPersonSave.setOnClickListener(this);
+
+        idSelectAddress.setOnClickListener(this);
+
 
     }
 
@@ -201,10 +214,7 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
         }
 
 
-        //测试数据
-        String pCode="440000";
-        String cCode="440100";
-        String aCode="440106";
+
         int sex;
         if (TextUtils.equals("男",etPersonSex.getText().toString())){
             sex=0;
@@ -325,9 +335,12 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
             case R.id.id_person_save:
                 UpdateUserInfo();
                 break;
+            case R.id.id_select_address:
+                //去往选择省市区的activity选择完成后返回
+                startActivityForResult(new Intent(PersonActivity.this,SelectAddressActivity.class),RESULT_SELECT_ADDRESS);
+                break;
         }
     }
-
 
 
 
@@ -446,9 +459,25 @@ public class PersonActivity extends BaseActivity implements View.OnClickListener
 
             }
         }
+        //从选择页面返回的结果
+        if (resultCode==RESULT_SELECT_ADDRESS){
+            if (data!=null) {
+                Bundle bundle = data.getBundleExtra("addressBundle");
+                HashMap<String, String> addressInfo = (HashMap<String, String>) bundle.getSerializable("addressInfo");
+                if (addressInfo != null) {
+                    //省市区的代码赋值
+                    pCode = addressInfo.get("pCode");
+                    cCode = addressInfo.get("cCode");
+                    aCode = addressInfo.get("aCode");
+                    etPersonAddress.setText(addressInfo.get("pName") + addressInfo.get("cName") + addressInfo.get("aName"));
+                }
+            }
+        }
         super.onActivityResult(requestCode, resultCode, data);
 
     }
+
+
 
 
     /**

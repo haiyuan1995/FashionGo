@@ -27,6 +27,7 @@
         <activity android:name=".AboutUsActivity"/>
         <activity android:name=".TipsActivity"/>
         <activity android:name=".PersonActivity"/>
+        <activity android:name=".SelectAddressActivity"/>
     </application>
 
 </manifest>

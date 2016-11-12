@@ -176,7 +176,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                                     showToast(LoginActivity.this,
                                             jsonObject.getString("message"));
                             //发送广播通知settingfragment更新UI
-                                LoginActivity.this.sendBroadcast(new Intent().setAction("LoginActivity"));
+                            LoginActivity.this.sendBroadcast(new Intent().setAction("LoginActivity"));
 //                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
                             finish();
                         }

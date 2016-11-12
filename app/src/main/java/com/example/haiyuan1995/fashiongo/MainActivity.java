@@ -123,7 +123,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
          };
 
         idViewpager.setAdapter(mFragmentPagerAdapter);
-
+        idViewpager.setOffscreenPageLimit(4);
         idViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

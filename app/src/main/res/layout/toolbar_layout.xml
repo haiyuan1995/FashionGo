@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:id="@+id/id_toolbar_searchLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -26,7 +26,7 @@
             android:src="@drawable/ic_search"/>
         <EditText
             android:paddingLeft="10dp"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:background="@mipmap/search_bg"
             android:id="@+id/id_toolbar_search"

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<android.support.v7.widget.Toolbar
+    android:layout_width="match_parent"
+    android:id="@+id/id_toolbar"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary"
+    android:theme="?attr/actionBarStyle"
+    android:gravity="right"
+    >
+    <TextView
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textSize="16sp"
+        android:text="确定"
+        android:id="@+id/id_address_save"
+        android:textColor="@color/colorWhite"
+        android:layout_width="match_parent" />
+</android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:textColor="@color/colorBlack"
+            android:textSize="22sp"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            android:text="省级"/>
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/id_select_pName"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            app:ms_arrow_tint="@color/colorPrimary"
+            app:ms_text_color="@color/colorBlack"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="22sp"
+            android:layout_margin="8dp"
+            android:text="市级"/>
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/id_select_cName"
+            android:layout_width="match_parent"
+            app:ms_text_color="@color/colorBlack"
+            android:layout_weight="1"
+            app:ms_arrow_tint="@color/colorPrimary"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:textColor="@color/colorBlack"
+            android:textSize="22sp"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            android:text="地区"/>
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/id_select_aName"
+            app:ms_arrow_tint="@color/colorPrimary"
+            app:ms_text_color="@color/colorBlack"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
