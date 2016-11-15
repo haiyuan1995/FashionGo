@@ -9,5 +9,6 @@
     <color name="colorGray">#757575</color>
     <color name="colorBlack">#212121</color>
     <color name="colorWhiteDark">#c8efefef</color>
+    <color name="colorLine">#f8e8e8e8</color>
     <color name="colorOrange">#ff5722</color>
 </resources>

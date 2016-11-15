@@ -1,6 +1,7 @@
 package adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import java.util.List;
 import gsonbean.GoodsADInfo;
 
 /**
- * Created by haiyuan1995 on 2016/11/7.
+ * 热门商品推荐
  */
 
 public class ThreeGoodsADInfoAdapter extends RVBaseAdapter {
@@ -33,7 +34,7 @@ public class ThreeGoodsADInfoAdapter extends RVBaseAdapter {
 
 
     @Override
-    public void onBindViewHolder(RVBaseAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         super.onBindViewHolder(holder,position);
         MyViewHolder myViewHolder= (MyViewHolder) holder;
 
@@ -57,14 +58,16 @@ public class ThreeGoodsADInfoAdapter extends RVBaseAdapter {
         }
     }
 
+
+
     @Override
-    public RVBaseAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=mLayoutInflater.inflate(R.layout.home_rv_threegoodsinfo_item,parent,false);
         return new MyViewHolder(view);
     }
 
 
-    private class MyViewHolder extends RVBaseAdapter.MyViewHolder{
+    private class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView tv_title;
         private TextView tv_context;
         private ImageView iv_goods;

@@ -28,6 +28,7 @@
         <activity android:name=".TipsActivity"/>
         <activity android:name=".PersonActivity"/>
         <activity android:name=".SelectAddressActivity"/>
+        <activity android:name=".ClassifyActivity"/>
     </application>
 
 </manifest>

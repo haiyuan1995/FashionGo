@@ -1,5 +1,6 @@
 package fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -8,9 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -19,6 +17,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
+import com.example.haiyuan1995.fashiongo.ClassifyActivity;
 import com.example.haiyuan1995.fashiongo.R;
 
 import java.util.ArrayList;
@@ -64,7 +63,8 @@ public class HomeFragment extends BaseFragment {
 
 
     ArrayList<String> imageUrlList = new ArrayList<>();
-
+    @BindView(R.id.id_goodsClassifyList)
+    ImageView idGoodsClassifyList;
 
 
     @Nullable
@@ -73,9 +73,15 @@ public class HomeFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         //初始化toolbar
+        initEvent();
+        return view;
+    }
+
+    private void initEvent() {
         toolbar.setLogo(R.mipmap.logo);
         BaseFragment.initToolbar(toolbar, getActivity());
         toolbar.findViewById(R.id.id_toolbar_searchLayout).setVisibility(View.VISIBLE);
+        toolbar.findViewById(R.id.id_goodsClassifyList).setVisibility(View.VISIBLE);
         idHomeRefresh.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
@@ -90,10 +96,15 @@ public class HomeFragment extends BaseFragment {
                         idHomeRefresh.finishRefresh();
 
                     }
-                },2000);
+                }, 2000);
             }
         });
-        return view;
+        idGoodsClassifyList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ClassifyActivity.class));
+            }
+        });
     }
 
     @Override
@@ -134,10 +145,9 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onFailure(Call<Recommendation> call, Throwable t) {
-                ToastAndSnakebarUtils.showToast(getContext(),"刷新失败:"+t.getMessage());
+                ToastAndSnakebarUtils.showToast(getContext(), "刷新失败:" + t.getMessage());
             }
         });
-
 
 
     }
@@ -161,7 +171,7 @@ public class HomeFragment extends BaseFragment {
         idHomeRvRecommendation.setAdapter(adapter);
         //数据加载完成
         idHomeRefresh.finishRefresh();
-        ToastAndSnakebarUtils.showToast(getContext(),"刷新成功!");
+        ToastAndSnakebarUtils.showToast(getContext(), "刷新成功!");
     }
 
     private void initThreeGoodsAD() {
@@ -229,6 +239,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     void initData() {
 
+
         BannerService bannerService = retrofit.create(BannerService.class);
         Call<Banner> call = bannerService.getBannerImages();
         call.enqueue(new Callback<Banner>() {
@@ -251,19 +262,20 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_goodslist:
-                ToastAndSnakebarUtils.showToast(getActivity(), "点击菜单");
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.menu_main, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.action_goodslist:
+//                ToastAndSnakebarUtils.showToast(getActivity(), "点击菜单");
+//                startActivity(new Intent(getActivity(), ClassifyActivity.class));
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

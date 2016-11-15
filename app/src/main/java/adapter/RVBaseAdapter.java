@@ -12,13 +12,13 @@ import java.util.List;
  * RecyclerView的基础Adapter
  */
 
-public abstract class RVBaseAdapter<T> extends RecyclerView.Adapter<RVBaseAdapter.MyViewHolder>{
-    public Context sContext;
+public abstract class RVBaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    Context sContext;
     private RecyclerViewItemOnClick recyclerViewItemOnClick;
-    public List<T> sList;
-    public LayoutInflater sLayoutInflater;
+    List<T> sList;
+    LayoutInflater sLayoutInflater;
 
-    public RVBaseAdapter(Context mContext, List<T> list) {
+    RVBaseAdapter(Context mContext, List<T> list) {
         this.sContext = mContext;
         this.sList = list;
         this.sLayoutInflater=LayoutInflater.from(mContext);
@@ -39,10 +39,10 @@ public abstract class RVBaseAdapter<T> extends RecyclerView.Adapter<RVBaseAdapte
     }
 
     @Override
-    public abstract MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType);
+    public abstract RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) ;
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (recyclerViewItemOnClick!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -58,13 +58,6 @@ public abstract class RVBaseAdapter<T> extends RecyclerView.Adapter<RVBaseAdapte
                     return true;//返回true代表事件结束
                 }
             });
-        }
-    }
-
-    public  class MyViewHolder extends RecyclerView.ViewHolder{
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
         }
     }
 }
