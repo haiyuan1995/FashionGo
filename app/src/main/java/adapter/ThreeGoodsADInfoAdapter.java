@@ -1,7 +1,6 @@
 package adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,14 +30,10 @@ public class ThreeGoodsADInfoAdapter extends RVBaseAdapter {
         this.mLayoutInflater=LayoutInflater.from(context);
     }
 
-    @Override
-    public ThreeGoodsADInfoAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=mLayoutInflater.inflate(R.layout.home_rv_threegoodsinfo_item,parent,false);
-        return new MyViewHolder(view);
-    }
+
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RVBaseAdapter.MyViewHolder holder, int position) {
         super.onBindViewHolder(holder,position);
         MyViewHolder myViewHolder= (MyViewHolder) holder;
 
@@ -62,8 +57,14 @@ public class ThreeGoodsADInfoAdapter extends RVBaseAdapter {
         }
     }
 
+    @Override
+    public RVBaseAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view=mLayoutInflater.inflate(R.layout.home_rv_threegoodsinfo_item,parent,false);
+        return new MyViewHolder(view);
+    }
 
-    private class MyViewHolder extends RecyclerView.ViewHolder{
+
+    private class MyViewHolder extends RVBaseAdapter.MyViewHolder{
         private TextView tv_title;
         private TextView tv_context;
         private ImageView iv_goods;

@@ -1,7 +1,6 @@
 package adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,7 +23,7 @@ public class RecommendationAdapter extends RVBaseAdapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RVBaseAdapter.MyViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         MyViewHolder myViewHolder= (MyViewHolder) holder;
         Recommendation.DataBean dataBean= (Recommendation.DataBean) sList.get(position);
@@ -36,12 +35,13 @@ public class RecommendationAdapter extends RVBaseAdapter {
     }
 
     @Override
-    public RecommendationAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RVBaseAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=sLayoutInflater.inflate(R.layout.home_rv_recommendation_item,parent,false);
         return new MyViewHolder(view);
     }
 
-    private class MyViewHolder extends RecyclerView.ViewHolder{
+
+    private class MyViewHolder extends RVBaseAdapter.MyViewHolder{
         private ImageView imageView;
         MyViewHolder(View itemView) {
             super(itemView);

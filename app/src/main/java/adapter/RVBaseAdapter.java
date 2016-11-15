@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * RecyclerView的基础Adapter
  */
 
-public abstract class RVBaseAdapter<T> extends RecyclerView.Adapter{
+public abstract class RVBaseAdapter<T> extends RecyclerView.Adapter<RVBaseAdapter.MyViewHolder>{
     public Context sContext;
     private RecyclerViewItemOnClick recyclerViewItemOnClick;
     public List<T> sList;
@@ -37,9 +38,11 @@ public abstract class RVBaseAdapter<T> extends RecyclerView.Adapter{
         this.recyclerViewItemOnClick=listener;
     }
 
+    @Override
+    public abstract MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType);
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         if (recyclerViewItemOnClick!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -55,6 +58,13 @@ public abstract class RVBaseAdapter<T> extends RecyclerView.Adapter{
                     return true;//返回true代表事件结束
                 }
             });
+        }
+    }
+
+    public  class MyViewHolder extends RecyclerView.ViewHolder{
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
         }
     }
 }
