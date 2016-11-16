@@ -29,6 +29,8 @@
         <activity android:name=".PersonActivity"/>
         <activity android:name=".SelectAddressActivity"/>
         <activity android:name=".ClassifyActivity"/>
+        <activity android:name=".GoodsInfoListActivity"/>
+        <activity android:name=".GoodsDetailsActivity"/>
     </application>
 
 </manifest>

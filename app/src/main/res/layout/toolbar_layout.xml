@@ -5,19 +5,23 @@
     android:layout_height="?attr/actionBarSize"
     android:background="@color/colorPrimary"
     android:id="@+id/toolbar">
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
         app:cardElevation="3dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="20dp"
         android:background="@color/colorWhite">
         <LinearLayout
             android:id="@+id/id_toolbar_searchLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:visibility="gone"
             android:focusable="true"
+            android:visibility="gone"
             android:focusableInTouchMode="true"
             android:orientation="horizontal">
         <ImageView
@@ -26,19 +30,27 @@
             android:src="@drawable/ic_search"/>
         <EditText
             android:paddingLeft="10dp"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@mipmap/search_bg"
+            android:inputType="text"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
             android:id="@+id/id_toolbar_search"
             android:hint="搜索商品">
         </EditText>
         </LinearLayout>
     </android.support.v7.widget.CardView>
-    <ImageView
-        android:id="@+id/id_goodsClassifyList"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:visibility="gone"
-        android:layout_marginLeft="8dp"
-        android:src="@drawable/ic_view_headline_white_48dp"/>
+
+        <ImageView
+            android:id="@+id/id_goodsClassifyList"
+            android:layout_width="32dp"
+            android:visibility="gone"
+            android:layout_height="32dp"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="right|center_vertical"
+            android:src="@drawable/ic_view_headline_white_48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="13dp" />
+    </RelativeLayout>
 </android.support.v7.widget.Toolbar>

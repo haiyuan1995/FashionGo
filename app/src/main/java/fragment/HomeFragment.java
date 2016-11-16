@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.example.haiyuan1995.fashiongo.ClassifyActivity;
+import com.example.haiyuan1995.fashiongo.GoodsInfoListActivity;
 import com.example.haiyuan1995.fashiongo.R;
 
 import java.util.ArrayList;
@@ -105,7 +106,17 @@ public class HomeFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), ClassifyActivity.class));
             }
         });
+
+
+        idToolbarSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), GoodsInfoListActivity.class).setAction("HomeFragment"));
+            }
+        });
     }
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -114,6 +125,9 @@ public class HomeFragment extends BaseFragment {
         initThreeGoodsAD();
         initRecommendation();
     }
+
+
+
 
     public interface BannerService {
 //    @GET("getThreeGoodsADInfo")
